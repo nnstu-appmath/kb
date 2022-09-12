@@ -142,6 +142,11 @@ docker image rm $(docker images -a -q) 
 
 Пользоваться этой командой стоит с осторожностью, но надо заметить, что при её использовании образы, хранящиеся в удалённом репозитории, удалены не будут. В этом заключается одно из преимуществ хранения образов в репозиториях.
 
+Вывести все неиспользуемые образы:
+```
+docker images -f dangling=true
+```
+
 ### [Основные команды для управления контейнерами:](https://docs.docker.com/engine/reference/commandline/container/)
 
 ```
@@ -222,15 +227,48 @@ docker ps -a | grep 'weeks ago' | awk '{print $1}' | xargs docker rm
 docker rm -v $(docker ps -a -q -f status=exited)
 ```
 
+**Зайти в уже запущенный контейнер (выполнить команду внутри контейнера):**
+
+```
+docker exec -it name_of_container /bin/bash
+```
+
+**Запустить контейнер и открыть в нем bash:**
+
+```
+docker run -it -d --name my_container CONTAINER_ID /bin/bash
+```
+
+**Копирование файлов внутрь контейнера (при смене путей, можно копировать из контейнера):**
+
+```
+docker ecp some_files.conf docker_container:/home/docker/
+```
+
 ### Разные команды:<br>
 **docker images** — показывает все изображения.<br>
 **docker import** — создает образ из архива.<br>
+**docker ps** — вывести работающие контейнеры. <br>
+**docker ps -a** — вывести все контейнеры. <br>
 **docker commit** — создает образ из контейнера, временно приостанавливая его, если он запущен.<br>
 **docker rmi** — удаляет образ.<br>
 **docker load** — загружает образ из tar-архива как STDIN, включая изображения и теги (начиная с версии 0.7).<br>
 **docker save** — сохраняет изображение в tar-архив поток в STDOUT со всеми родительскими слоями, тегами и версиями (начиная с 0.7).<br>
 **docker version** — вывод сведений о версиях клиента и сервера Docker.<br>
 **docker login** — вход в реестр Docker. Она позволяет войти в учётную запись на Docker Hub. Для входа в систему вам понадобится ввести имя пользователя и пароль.<br>
+**docker logout** — выход из реестра Докерхаба.<br>
+**Вход в WebUI локального registry:**<br>
+
+```
+docker login localhost:8080
+```
+**Вsход из локального registry:**<br>
+
+```
+docker logout localhost:8080
+```
+
+**[docker search](https://docs.docker.com/engine/reference/commandline/search/)** — поиск образа.<br>
 **docker system prune** — удаление неиспользуемых контейнеров, сетей и образов, которым не назначено имя и тег.<br>
 Вот пример её использования:
 
