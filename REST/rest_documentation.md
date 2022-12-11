@@ -175,12 +175,14 @@ https://www.postman.com/downloads/
     ![](https://thumb.tildacdn.com/tild3131-3132-4530-b064-623336616465/-/resize/514x/-/format/webp/1.png)
 
 * Выберите HTTP Request
+
     ![](https://thumb.tildacdn.com/tild6632-6530-4136-b932-366438356335/-/format/webp/2.png)
 
 ### 2. Выбрать метод
 
 Давайте укажем метод GET, обычно он проставляется постманом по умолчанию:
-    ![](https://thumb.tildacdn.com/tild6534-3035-4166-b231-363732643862/-/resize/380x/-/format/webp/3.png)
+
+![](https://thumb.tildacdn.com/tild6534-3035-4166-b231-363732643862/-/resize/380x/-/format/webp/3.png)
 
 ### 3. Ввести адрес самого запроса (endpoint)
 
