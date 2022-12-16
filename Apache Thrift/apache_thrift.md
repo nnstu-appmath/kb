@@ -1,4 +1,4 @@
-![[apache-thrift.png](https://github.com/nnstu-appmath/kb/blob/kl_am1_apache_thrift/Apache%20Thrift/apache-thrift.png)]]
+![apache-thrift.png](https://github.com/nnstu-appmath/kb/blob/kl_am1_apache_thrift/Apache%20Thrift/apache-thrift.png)
 
 # Apache Thrift. 
 **Apache Thrift** — это фреймворк для реализации RPC в сервисах с многоязычной поддержкой. **RPC (удаленный вызов процедур)** подобен вызову функции, только он присутствует удаленно на другом сервере в качестве службы. Служба предоставляет множество таких функций/процедур своему клиенту. И клиенту требуется узнать, какие функции/процедуры предоставляются этой службой и каковы их параметры. 
