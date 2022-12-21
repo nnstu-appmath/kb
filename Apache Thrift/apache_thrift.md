@@ -139,7 +139,7 @@ void delete(1:i32 key)
 
 После запуска команд Thrift должен сгенерировать код внутри каталогов gen-java/tutorial и gen-py/tutorial для Java и Python соответственно. Не забудьте использовать sudo, если каталоги не созданы! Было бы полезно взглянуть на этот код, чтобы лучше понять, какой код генерирует для вас Thrift. Вы можете найти краткое объяснение кода здесь: [Thrift’s auto-generated code for the multiplication service example](https://thrift-tutorial.readthedocs.io/en/latest/multiplication-service.html).
 
--   Now we are ready to write our own code. Lets first write some Java code for our client and server and then we will also write a Python client to send requests to our server. We will not need to change anything on the server part to do this!
+Теперь мы готовы написать собственный код. Давайте сначала напишем некоторый код Java для нашего клиента и сервера, а затем мы также напишем клиент Python для отправки запросов на наш сервер. Для этого нам не нужно ничего менять на серверной части!
 
 ### Обработчик умножения
 
@@ -245,7 +245,7 @@ The python client implements anything as discussed for the java client. The lang
 
 ### Клиент умножения Java
 
-Важно отметить в клиентском коде использование TBinaryProtocol для сериализации и десериализации. Стоит отметит, что можно использовать компактный, протокол JSON или любой другой протокол, поддерживаемый thrift. Дополнительные сведения о протоколах, которые вы можете использовать, можно найти в [Thrift protocol stack](https://thrift-tutorial.readthedocs.io/en/latest/thrift-stack.html). Еще одна важная вещь, на которую следует обратить внимание, — это использование клиента и соответствующего метода client.multiply(), предоставленного нам автоматически сгенерированным кодом экономии. Этот метод вызывает другой метод TServiceClient.sendBase(), который записывает данные в сеть.
+Важно отметить в клиентском коде использование TBinaryProtocol для сериализации(перевода структуры данных в последовательность байтов) и десериализации(создание структуры данных из битовой последовательности). Стоит отметит, что можно использовать компактный, протокол JSON или любой другой протокол, поддерживаемый thrift. Дополнительные сведения о протоколах, которые вы можете использовать, можно найти в [Thrift protocol stack](https://thrift-tutorial.readthedocs.io/en/latest/thrift-stack.html). Еще одна важная вещь, на которую следует обратить внимание, — это использование клиента и соответствующего метода client.multiply(), предоставленного нам автоматически сгенерированным кодом экономии. Этот метод вызывает другой метод TServiceClient.sendBase(), который записывает данные в сеть.
 
 ~~~
 > import org.apache.thrift.TException;
