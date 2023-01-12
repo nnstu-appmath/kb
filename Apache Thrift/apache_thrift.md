@@ -145,18 +145,18 @@ void delete(1:i32 key)
 
 Ниже представлен класс MultiplicationHandler, в котором реализова интерфейс, указанный ранее в нашем определении multi.thrift, и для которого Thrift уже сгенерировал код.
 ~~~
-> import org.apache.thrift.TException;
-> 
-> public class MultiplicationHandler implements MultiplicationService.Iface {
-> 
-> 	@Override
-> 	 public int multiply(int n1, int n2) throws TException {
-> 	    System.out.println("Multiply(" + n1 + "," + n2 + ")");
-> 	    return n1 * n2;
-> 	 }
-> 
-> 	
-> }
+  import org.apache.thrift.TException;
+
+  public class MultiplicationHandler implements MultiplicationService.Iface {
+ 
+ 	@Override
+ 	 public int multiply(int n1, int n2) throws TException {
+ 	    System.out.println("Multiply(" + n1 + "," + n2 + ")");
+ 	    return n1 * n2;
+ 	 }
+ 
+ 	
+ }
 ~~~
 
 ### Java Сервер умножения
@@ -164,83 +164,83 @@ void delete(1:i32 key)
 Ниже представлен класс MultiplicationServer, в котором реализован простой сервер. Единственное, что стоит упомянуть о реализации сервера, — это использование класса Processor, автоматически сгенерированного Thrift. Процессор делает две простые вещи. Считывает данные из входного потока и записывает данные в выходной поток. Процессор считывает данные со входа, обрабатывает данные (фактически использует обработчик, указанный пользователем для обработки данных) и записывает обработанные данные на выход. Наконец, я должен упомянуть, что для этого примера я использовал простую серверную реализацию, но было бы так же просто использовать любую из реализаций, предлагаемых thrift (threadPoolServer или nonBlockingServer).
 
 ~~~
-> import org.apache.thrift.TException;
-> import org.apache.thrift.protocol.TBinaryProtocol;
-> import org.apache.thrift.protocol.TProtocol;
-> import org.apache.thrift.transport.TSocket;
-> import org.apache.thrift.transport.TTransport;
-> 
-> public class MultiplicationClient {
->   public static void main(String [] args) {
-> 
->    
->     try {
->       TTransport transport;
->      
->       transport = new TSocket("localhost", 9090);
->       transport.open();
-> 
->       TProtocol protocol = new  TBinaryProtocol(transport);
->       MultiplicationService.Client client = new MultiplicationService.Client(protocol);
-> 
->       perform(client);
-> 
->       transport.close();
->     } catch (TException x) {
->       x.printStackTrace();
->     } 
->   }
-> 
->   private static void perform(MultiplicationService.Client client) throws TException
->   {
->    
->     int product = client.multiply(3,5);
->     System.out.println("3*5=" + product);
->   }
-> }
+ import org.apache.thrift.TException;
+ import org.apache.thrift.protocol.TBinaryProtocol;
+ import org.apache.thrift.protocol.TProtocol;
+ import org.apache.thrift.transport.TSocket;
+ import org.apache.thrift.transport.TTransport;
+ 
+ public class MultiplicationClient {
+   public static void main(String [] args) {
+ 
+    
+     try {
+       TTransport transport;
+      
+       transport = new TSocket("localhost", 9090);
+       transport.open();
+ 
+       TProtocol protocol = new  TBinaryProtocol(transport);
+       MultiplicationService.Client client = new MultiplicationService.Client(protocol);
+ 
+       perform(client);
+ 
+       transport.close();
+     } catch (TException x) {
+       x.printStackTrace();
+     } 
+   }
+ 
+   private static void perform(MultiplicationService.Client client) throws TException
+   {
+    
+     int product = client.multiply(3,5);
+     System.out.println("3*5=" + product);
+   }
+ }
 
-### Python Multiplication Client[](https://thrift-tutorial.readthedocs.io/en/latest/usage-example.html#python-multiplication-client "Permalink to this headline")
+Python Multiplication Client[](https://thrift-tutorial.readthedocs.io/en/latest/usage-example.html#python-multiplication-client "Permalink to this headline")
 
 The python client implements anything as discussed for the java client. The language syntax is the only thing I had to change on my approach.
 
-> #!/usr/bin/env python
-> 
-> import sys
-> sys.path.append('../gen-py')
-> 
-> from tutorial import MultiplicationService
-> from tutorial.ttypes import *
-> 
-> from thrift import Thrift
-> from thrift.transport import TSocket
-> from thrift.transport import TTransport
-> from thrift.protocol import TBinaryProtocol
-> 
-> try:
-> 
->   # Make socket
->   transport = TSocket.TSocket('localhost', 9090)
-> 
->   # Buffering is critical. Raw sockets are very slow
->   transport = TTransport.TBufferedTransport(transport)
-> 
->   # Wrap in a protocol
->   protocol = TBinaryProtocol.TBinaryProtocol(transport)
-> 
->   # Create a client to use the protocol encoder
->   client = MultiplicationService.Client(protocol)
-> 
->   # Connect!
->   transport.open()
-> 
->   product = client.multiply(4,5)
->   print '4*5=%d' % (product)
-> 
->   # Close!
->   transport.close()
-> 
-> except Thrift.TException, tx:
->   print '%s' % (tx.message)
+ #!/usr/bin/env python
+ 
+ import sys
+ sys.path.append('../gen-py')
+ 
+ from tutorial import MultiplicationService
+ from tutorial.ttypes import *
+ 
+ from thrift import Thrift
+ from thrift.transport import TSocket
+ from thrift.transport import TTransport
+ from thrift.protocol import TBinaryProtocol
+ 
+ try:
+ 
+   # Make socket
+   transport = TSocket.TSocket('localhost', 9090)
+ 
+   # Buffering is critical. Raw sockets are very slow
+   transport = TTransport.TBufferedTransport(transport)
+ 
+   # Wrap in a protocol
+   protocol = TBinaryProtocol.TBinaryProtocol(transport)
+ 
+   # Create a client to use the protocol encoder
+   client = MultiplicationService.Client(protocol)
+ 
+   # Connect!
+   transport.open()
+ 
+   product = client.multiply(4,5)
+   print '4*5=%d' % (product)
+ 
+   # Close!
+   transport.close()
+ 
+ except Thrift.TException, tx:
+   print '%s' % (tx.message)
 ~~~~
 
 ### Клиент умножения Java
@@ -248,40 +248,40 @@ The python client implements anything as discussed for the java client. The lang
 Важно отметить в клиентском коде использование TBinaryProtocol для сериализации(перевода структуры данных в последовательность байтов) и десериализации(создание структуры данных из битовой последовательности). Стоит отметит, что можно использовать компактный, протокол JSON или любой другой протокол, поддерживаемый thrift. Дополнительные сведения о протоколах, которые вы можете использовать, можно найти в [Thrift protocol stack](https://thrift-tutorial.readthedocs.io/en/latest/thrift-stack.html). Еще одна важная вещь, на которую следует обратить внимание, — это использование клиента и соответствующего метода client.multiply(), предоставленного нам автоматически сгенерированным кодом экономии. Этот метод вызывает другой метод TServiceClient.sendBase(), который записывает данные в сеть.
 
 ~~~
-> import org.apache.thrift.TException;
-> import org.apache.thrift.protocol.TBinaryProtocol;
-> import org.apache.thrift.protocol.TProtocol;
-> import org.apache.thrift.transport.TSocket;
-> import org.apache.thrift.transport.TTransport;
-> 
-> public class MultiplicationClient {
->   public static void main(String [] args) {
-> 
->    
->     try {
->       TTransport transport;
->      
->       transport = new TSocket("localhost", 9090);
->       transport.open();
-> 
->       TProtocol protocol = new  TBinaryProtocol(transport);
->       MultiplicationService.Client client = new MultiplicationService.Client(protocol);
-> 
->       perform(client);
-> 
->       transport.close();
->     } catch (TException x) {
->       x.printStackTrace();
->     } 
->   }
-> 
->   private static void perform(MultiplicationService.Client client) throws TException
->   {
->    
->     int product = client.multiply(3,5);
->     System.out.println("3*5=" + product);
->   }
-> }
+ import org.apache.thrift.TException;
+ import org.apache.thrift.protocol.TBinaryProtocol;
+ import org.apache.thrift.protocol.TProtocol;
+ import org.apache.thrift.transport.TSocket;
+ import org.apache.thrift.transport.TTransport;
+ 
+ public class MultiplicationClient {
+   public static void main(String [] args) {
+ 
+    
+     try {
+       TTransport transport;
+      
+       transport = new TSocket("localhost", 9090);
+       transport.open();
+ 
+       TProtocol protocol = new  TBinaryProtocol(transport);
+       MultiplicationService.Client client = new MultiplicationService.Client(protocol);
+ 
+       perform(client);
+ 
+       transport.close();
+     } catch (TException x) {
+       x.printStackTrace();
+     } 
+   }
+ 
+   private static void perform(MultiplicationService.Client client) throws TException
+   {
+    
+     int product = client.multiply(3,5);
+     System.out.println("3*5=" + product);
+   }
+ }
 ~~~
 
 ### Клиент умножения Python
@@ -289,42 +289,42 @@ The python client implements anything as discussed for the java client. The lang
 Клиент Python реализует все, что обсуждалось для клиента Java. Синтаксис языка — единственное, отличие.
 
 ~~~
-> #!/usr/bin/env python
-> 
-> import sys
-> sys.path.append('../gen-py')
-> 
-> from tutorial import MultiplicationService
-> from tutorial.ttypes import *
-> 
-> from thrift import Thrift
-> from thrift.transport import TSocket
-> from thrift.transport import TTransport
-> from thrift.protocol import TBinaryProtocol
-> 
-> try:
-> 
->   # Make socket
->   transport = TSocket.TSocket('localhost', 9090)
-> 
->   # Buffering is critical. Raw sockets are very slow
->   transport = TTransport.TBufferedTransport(transport)
-> 
->   # Wrap in a protocol
->   protocol = TBinaryProtocol.TBinaryProtocol(transport)
-> 
->   # Create a client to use the protocol encoder
->   client = MultiplicationService.Client(protocol)
-> 
->   # Connect!
->   transport.open()
-> 
->   product = client.multiply(4,5)
->   print '4*5=%d' % (product)
-> 
->   # Close!
->   transport.close()
-> 
-> except Thrift.TException, tx:
->   print '%s' % (tx.message)
+ #!/usr/bin/env python
+ 
+ import sys
+ sys.path.append('../gen-py')
+ 
+ from tutorial import MultiplicationService
+ from tutorial.ttypes import *
+ 
+ from thrift import Thrift
+ from thrift.transport import TSocket
+ from thrift.transport import TTransport
+ from thrift.protocol import TBinaryProtocol
+ 
+ try:
+ 
+   # Make socket
+   transport = TSocket.TSocket('localhost', 9090)
+ 
+   # Buffering is critical. Raw sockets are very slow
+   transport = TTransport.TBufferedTransport(transport)
+ 
+   # Wrap in a protocol
+   protocol = TBinaryProtocol.TBinaryProtocol(transport)
+ 
+   # Create a client to use the protocol encoder
+   client = MultiplicationService.Client(protocol)
+ 
+   # Connect!
+   transport.open()
+ 
+   product = client.multiply(4,5)
+   print '4*5=%d' % (product)
+ 
+   # Close!
+   transport.close()
+ 
+ except Thrift.TException, tx:
+   print '%s' % (tx.message)
 ~~~
